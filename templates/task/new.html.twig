@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nueva Tarea{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">
+                    <i class="bi bi-plus-circle"></i> Nueva Tarea
+                </h3>
+            </div>
+            <div class="card-body">
+                {{ form_start(form) }}
+                    <div class="mb-3">
+                        {{ form_label(form.title) }}
+                        {{ form_widget(form.title) }}
+                        {{ form_errors(form.title) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(form.description) }}
+                        {{ form_widget(form.description) }}
+                        {{ form_errors(form.description) }}
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        {{ form_widget(form.isCompleted) }}
+                        {{ form_label(form.isCompleted) }}
+                        {{ form_errors(form.isCompleted) }}
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ path('task_index') }}" class="btn btn-secondary">
+                            <i class="bi bi-x-circle"></i> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-save"></i> Guardar Tarea
+                        </button>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

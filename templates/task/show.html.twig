@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ task.title }}{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="mb-3">
+            <a href="{{ path('task_index') }}" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Volver a la lista
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3 class="mb-0">{{ task.title }}</h3>
+                {% if task.isCompleted %}
+                    <span class="badge bg-success fs-6">
+                        <i class="bi bi-check-circle"></i> Completada
+                    </span>
+                {% else %}
+                    <span class="badge bg-warning text-dark fs-6">
+                        <i class="bi bi-clock"></i> Pendiente
+                    </span>
+                {% endif %}
+            </div>
+            <div class="card-body">
+                <div class="mb-4">
+                    <h5 class="text-muted">Descripción</h5>
+                    {% if task.description %}
+                        <p class="lead">{{ task.description }}</p>
+                    {% else %}
+                        <p class="text-muted"><em>Sin descripción</em></p>
+                    {% endif %}
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="text-muted">Fecha de Creación</h6>
+                        <p>
+                            <i class="bi bi-calendar"></i>
+                            {{ task.createdAt|date('d/m/Y') }}
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="text-muted">Hora de Creación</h6>
+                        <p>
+                            <i class="bi bi-clock"></i>
+                            {{ task.createdAt|date('H:i:s') }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <h6 class="text-muted">Creado por</h6>
+                    <p>
+                        <i class="bi bi-person"></i>
+                        {{ task.createdBy.email }}
+                    </p>
+                </div>
+
+                <div class="mb-3">
+                    <h6 class="text-muted">Estado</h6>
+                    {% if task.isCompleted %}
+                        <div class="alert alert-success">
+                            <i class="bi bi-check-circle-fill"></i>
+                            Esta tarea está marcada como completada
+                        </div>
+                    {% else %}
+                        <div class="alert alert-warning">
+                            <i class="bi bi-exclamation-triangle-fill"></i>
+                            Esta tarea está pendiente de completar
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <a href="{{ path('task_edit', {'id': task.id}) }}" class="btn btn-secondary">
+                            <i class="bi bi-pencil"></i> Editar
+                        </a>
+                        
+                        <form method="post" action="{{ path('task_toggle', {'id': task.id}) }}" class="d-inline">
+                            <input type="hidden" name="_token" value="{{ csrf_token('toggle' ~ task.id) }}">
+                            <button class="btn btn-{% if task.isCompleted %}warning{% else %}success{% endif %}" type="submit">
+                                <i class="bi bi-{% if task.isCompleted %}arrow-counterclockwise{% else %}check{% endif %}"></i>
+                                {% if task.isCompleted %}
+                                    Marcar como Pendiente
+                                {% else %}
+                                    Marcar como Completada
+                                {% endif %}
+                            </button>
+                        </form>
+                    </div>
+
+                    <form method="post" action="{{ path('task_delete', {'id': task.id}) }}" class="delete-form">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ task.id) }}">
+                        <button class="btn btn-danger" type="submit">
+                            <i class="bi bi-trash"></i> Eliminar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
