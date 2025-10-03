@@ -94,23 +94,23 @@ Abre tu navegador en: **http://localhost:8000**
 
 ```
 prueba-symfony/
-├── config/              # Configuraciones de Symfony
-├── migrations/          # Migraciones de base de datos
-├── public/              # Punto de entrada web
+├── config/              
+├── migrations/         
+├── public/             
 ├── src/
-│   ├── Command/         # Comandos de consola
-│   ├── Controller/      # Controladores
+│   ├── Command/         
+│   ├── Controller/     
 │   │   ├── SecurityController.php
 │   │   └── TaskController.php
-│   ├── Entity/          # Entidades Doctrine
+│   ├── Entity/         
 │   │   ├── Task.php
 │   │   └── User.php
-│   ├── Form/            # Formularios
+│   ├── Form/            
 │   │   └── TaskType.php
-│   ├── Repository/      # Repositorios
-│   └── Security/        # Autenticación
+│   ├── Repository/      
+│   └── Security/        
 │       └── AppAuthenticator.php
-├── templates/           # Plantillas Twig
+├── templates/           
 │   ├── base.html.twig
 │   ├── security/
 │   │   ├── login.html.twig
@@ -120,9 +120,9 @@ prueba-symfony/
 │       ├── new.html.twig
 │       ├── edit.html.twig
 │       └── show.html.twig
-├── var/                 # Cache y logs
-├── .env                 # Variables de entorno
-└── composer.json        # Dependencias PHP
+├── var/                 
+├── .env                 
+└── composer.json        
 ```
 
 
